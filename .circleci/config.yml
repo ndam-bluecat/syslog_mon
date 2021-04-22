@@ -11,7 +11,7 @@ jobs:
         - checkout
         - setup_remote_docker
         - attach_workspace:
-            at: ~/repo/${CIRCLE_PROJECT_REPONAME}
+            at: ~/repo
         - run:
             name: Build syslog_monitoring:${CIRCLE_TAG} image
             command: |
