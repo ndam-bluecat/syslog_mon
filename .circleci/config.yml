@@ -19,7 +19,7 @@ jobs:
         - run:
             name: Export gateway_nfv_scheduler:${CIRCLE_TAG} image
             command: |
-              export AMD_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}-amd64
+              export AMD_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}_amd64
               mkdir -p ~/repo/${AMD_FOLDER_NAME}
               cp -rf ~/repo/syslog_monitoring/Config ~/repo/${AMD_FOLDER_NAME}/
               cd ~/repo/${AMD_FOLDER_NAME}
@@ -27,14 +27,14 @@ jobs:
         - run:
             name: Create a tar.gz file
             command: |
-              export AMD_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}-amd64
+              export AMD_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}_amd64
               cd ~/repo
               tar -czvf ${AMD_FOLDER_NAME}.tar.gz ${AMD_FOLDER_NAME}
         - run:
             name: Move to release directory
             command: |
               mkdir -p ~/release/packages
-              export AMD_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}-amd64
+              export AMD_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}_amd64
               cp -rf ~/repo/${AMD_FOLDER_NAME}.tar.gz ~/release/packages/
         - persist_to_workspace:
             root: ~/release
@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Export gateway_nfv_scheduler:${CIRCLE_TAG} image
           command: |
-            export ARM_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}-amd64
+            export ARM_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}_arm64
             mkdir -p ~/repo/${ARM_FOLDER_NAME}
             cp -rf ~/repo/syslog_monitoring/Config ~/repo/${ARM_FOLDER_NAME}/
             cd ~/repo/${ARM_FOLDER_NAME}
@@ -65,14 +65,14 @@ jobs:
       - run:
           name: Create a tar.gz file
           command: |
-            export ARM_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}-amd64
+            export ARM_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}_arm64
             cd ~/repo
             tar -czvf ${ARM_FOLDER_NAME}.tar.gz ${ARM_FOLDER_NAME}
       - run:
           name: Move to release directory
           command: |
             mkdir -p ~/release/packages
-            export ARM_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}-amd64
+            export ARM_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}_arm64
             cp -rf ~/repo/${ARM_FOLDER_NAME}.tar.gz ~/release/packages/
       - persist_to_workspace:
           root: ~/release
