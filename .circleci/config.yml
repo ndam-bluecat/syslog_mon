@@ -15,6 +15,7 @@ jobs:
         - run:
             name: Build syslog_monitoring:${CIRCLE_TAG} image
             command: |
+              echo ${PWD}
               ls -la 
               cd ~/repo/syslog_monitoring/
               docker build -t syslog_monitoring:${CIRCLE_TAG} .
