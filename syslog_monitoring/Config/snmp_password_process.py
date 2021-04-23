@@ -23,7 +23,7 @@ def decrypt_password(encoded):
     return base64.b64decode(encoded)
 
 
-if _name_ == '__main__':
+if __name__ == '__main__':
     while True:
         password = input("Let's type a new password:")
         if password.strip() is not "":
