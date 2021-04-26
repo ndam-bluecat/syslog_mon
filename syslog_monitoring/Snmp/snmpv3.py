@@ -25,7 +25,7 @@ from config import *
 #     PRIV_PROTOCOL
 # )
 
-from syslog_monitoring.Config.snmp_password_process import (
+from Config.snmp_password_process import (
     decrypt_password
 )
 import json

@@ -33,7 +33,7 @@
 
 - Then run docker:
   ```
-  sudo docker run --restart unless-stopped -d --name syslog-sv -v $SYSLOG_MON:/etc/syslog-ng/syslog_monitoring/Config/ -v <log_directory_path>:/var/log/mon-app syslog-server:<tag>
+  sudo docker run --restart unless-stopped -d -it --name syslog-sv -v $SYSLOG_MON:/etc/syslog-ng/syslog_monitoring/Config/ -v <log_directory_path>:/var/log/mon-app syslog-server:<tag> bash
   ```
 
 ### Configure Syslog Service in BAM 9.3: 
