@@ -1,14 +1,15 @@
 # SYSLOG MONITORING
 <p>- Can setup with either using Section 1.1 or 1.2.</p>
 
-## 1.1. SETUP SYSLOG MONITORING DOCKER CONTAINER ON BDDS-9.3 IN ARM SYSTEM
+## 1.1. SETUP SYSLOG MONITORING DOCKER CONTAINER ON BDDS-9.3
 
-### Import a docker image from file named syslog-server.tar
-- Download and copy syslog-server.tar to BDDS server  
+### Import a docker image
+- Download and copy syslog_mon_arm64.tar.gz for ARM System (syslog_mon_amd64.tar.gz if AMD System) to BDDS server
+- Extract syslog_mon_arm64.tar.gz file  
 - Require to have docker installed in this server
 - Load image from tar file
   ```
-  docker load -i syslog-server.tar
+  docker load -i syslog_monitoring.tar
   ```
   
 >Make sure $SYSLOG_MON is set for configuration folder on your host. Include:
@@ -18,22 +19,18 @@
 - snmp_config.json
 - snmp_password_process.py
 
->To check $SYSLOG_MON is set: <code>echo $SYSLOG_MON</code> 
-
->Note: How to get EngineID for notifications sent from docker container
-- Get MAC Address by using command as ```docker inspect <container name or id>```, then the EngineID shall be ```0x80001f8803 <MAC Address>```
-- For instance: EngineID is 0x80001f88030242f7807f02 in case of "MacAddress": "02:42:f7:80:7f:02"
+>To check $SYSLOG_MON is set: <code>echo $SYSLOG_MON</code>
 
 ### Run docker container from a docker image named syslog-server
-
-- Before running container, remember to create log folder then set permission:
+- Run docker:
+  ```
+  docker run --restart unless-stopped --network=host -d -it --name syslog-sv -v $SYSLOG_MON:/etc/syslog-ng/syslog_monitoring/Config/ syslog_monitoring:<tag> bash
+  ```
+- Note:
+  - To mount logs folder, use the following option, remember to set permission:	
   ```
   chmod -R o=rwx <log_directory_path>
-  ```
-
-- Then run docker:
-  ```
-  sudo docker run --restart unless-stopped -d -it --name syslog-sv -v $SYSLOG_MON:/etc/syslog-ng/syslog_monitoring/Config/ -v <log_directory_path>:/var/log/mon-app syslog-server:<tag> bash
+   -v <log_directory_path>:/var/log/mon-app
   ```
 
 ### Configure Syslog Service in BAM 9.3: 
@@ -41,14 +38,14 @@ To forward log to Syslog Monitoring application in the container, please do the 
 
 1. Select **Server** > Choose a server > **Server Service Configuration**
 2. Select **Syslog** Service Type
-3. Add **container IP** and **Port**
+3. Add **BDDS IP** and **Port**
 
 ![Syslog](images/syslog_service.png?raw=true)
 Note: Get docker container IP address by using command as ```docker inspect <container name or id>```
 
 ## 1.2. SETUP SYSLOG MONITORING ON BDDS MANUALLY
 
-1.  Download the syslog monitoring package from Nexus.
+1.  Download the syslog monitoring package.
 
 2.  Go to the directory that contains the package and extract it
     > tar -xzvf syslog_mon_in_dds.tar.gz
