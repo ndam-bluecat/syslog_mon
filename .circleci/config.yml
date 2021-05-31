@@ -22,6 +22,7 @@ jobs:
               export AMD_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}_amd64
               mkdir -p ~/repo/${AMD_FOLDER_NAME}
               cp -rf ~/repo/syslog_monitoring/Config ~/repo/${AMD_FOLDER_NAME}/
+              cp -rf ~/repo/syslog_monitoring/services ~/repo/${AMD_FOLDER_NAME}/
               cd ~/repo/${AMD_FOLDER_NAME}
               docker save -o syslog_monitoring.tar syslog_monitoring:${CIRCLE_TAG}
         - run:
@@ -60,6 +61,7 @@ jobs:
             export ARM_FOLDER_NAME=${CIRCLE_PROJECT_REPONAME}_arm64
             mkdir -p ~/repo/${ARM_FOLDER_NAME}
             cp -rf ~/repo/syslog_monitoring/Config ~/repo/${ARM_FOLDER_NAME}/
+            cp -rf ~/repo/syslog_monitoring/services ~/repo/${ARM_FOLDER_NAME}/
             cd ~/repo/${ARM_FOLDER_NAME}
             docker save -o syslog_monitoring.tar syslog_monitoring:${CIRCLE_TAG}
       - run:
