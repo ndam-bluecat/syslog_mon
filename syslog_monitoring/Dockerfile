@@ -20,4 +20,4 @@ RUN \
     dpkg-reconfigure tzdata && \
     apt-get install ntp -y
 
-CMD ["syslog-ng -F"]
+CMD ["syslog-ng", "-F"]
