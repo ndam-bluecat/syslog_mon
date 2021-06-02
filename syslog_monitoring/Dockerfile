@@ -12,11 +12,10 @@ COPY . /etc/syslog-ng/syslog_monitoring
 COPY filters.conf /usr/share/syslog-ng/include/scl/
 
 RUN echo 'export PYTHONPATH=/etc/syslog-ng/syslog_monitoring' >> /etc/default/syslog-ng && \
-    echo 'service syslog-ng start' >> /etc/bash.bashrc && \
     pip install wheel && \
     pip install -r /etc/syslog-ng/syslog_monitoring/requirements.txt && \
     apt-get install -y tzdata && \
     dpkg-reconfigure tzdata && \
     apt-get install ntp -y
 
-CMD ["/bin/bash"]
+CMD ["syslog-ng"]
