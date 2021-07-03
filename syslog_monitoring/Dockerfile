@@ -8,7 +8,7 @@ COPY syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
 RUN mkdir /var/log/mon-app /var/log/mon-app/fw-log /var/log/mon-app/filter-log && \
     mkdir /usr/share/syslog-ng/include/scl/syslog_mon/
 COPY . /etc/syslog-ng/syslog_monitoring
-COPY filters.conf /usr/share/syslog-ng/include/scl/
+COPY filters.conf /usr/share/syslog-ng/include/scl/syslog_mon/
 RUN pip install wheel && \
     pip install -r /etc/syslog-ng/syslog_monitoring/requirements.txt && \
     apt-get install -y tzdata && \
