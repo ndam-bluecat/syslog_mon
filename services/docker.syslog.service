@@ -4,6 +4,7 @@ After=docker.service
 Requires=docker.service
 
 [Service]
+StandardOutput=null
 type=simple
 Environment=IMAGE_NAME='syslog_monitoring:<TAG_RELEASE>'               \
             NAME='syslog-sv'
