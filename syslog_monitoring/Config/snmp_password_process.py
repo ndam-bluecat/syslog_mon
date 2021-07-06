@@ -31,5 +31,3 @@ if __name__ == '__main__':
     pwd_encrypt = encrypt_password(password.strip())
     print "{0} {1}".format("Your password is encrypted as:", pwd_encrypt)
     print "Please update your encrypted password in snmp_config.json file\n"
-
-
